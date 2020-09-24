@@ -26,7 +26,7 @@ public class Dibujar extends JPanel {
 
     //definiendo hilo de ejecucion
     private Thread hilo;
-
+int cont;
     private final int[] figura = {
 //        0x00000000,
 //0x000001e0,
@@ -210,37 +210,105 @@ public class Dibujar extends JPanel {
              
     }
 
-    @SuppressWarnings("empty-statement")
+   
     public void Dibuja() {
         
-        int cambio = (int)Math.random()*200;
         
         
-        this.cordenadax= (int) (Math.random() * 500);
-        this.cordenaday=(int) (Math.random() * 500);
+        this.cordenadax= (int) (Math.random() * ventana.getWidth()- anchoBits);
+        this.cordenaday=(int) (Math.random() * ventana.getHeight()-60);
+        int cambio = (int) (Math.random()*4);
+        movimiento(cambio);
         
-        
-        for (;;) {
-            try{
-                this.cordenaday=this.cordenaday-cambio;
-                this.cordenadax=this.cordenadax-cambio;
-                this.hilo.sleep(250);
-                paint(getGraphics());
-            }catch(Exception e){
-                System.out.println(e.getMessage());
-
-            }
-            try{
-                this.cordenaday=this.cordenaday+10;
-                this.cordenadax=this.cordenadax+10;
-                this.hilo.sleep(250);
-                paint(getGraphics());
-            }catch(Exception e){
-                System.out.println(e.getMessage());
-
-        }
-    }
+        while(cont<10){
+            System.out.println("TERIMINO");
+            System.exit(0);
             
         }
         
-}
+        
+//        for (;;) {
+//            try{
+//                this.cordenaday=this.cordenaday-cambio+10;
+//                this.cordenadax=this.cordenadax-cambio+10;
+//                this.hilo.sleep(250);
+//                paint(getGraphics());
+//               
+//            }catch(Exception e){
+//                System.out.println(e.getMessage());
+//            }
+            
+//         
+    }
+        
+    
+    public void movimiento(int au){
+        if (au==0) {
+            do {
+                try {
+                    this.cordenadax=this.cordenadax-10;
+                   this.hilo.sleep(250);
+                   paint(getGraphics()); 
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+            } while (this.cordenadax>0);
+            paint(getGraphics());
+            
+            
+            
+            
+        }
+        else if(au==1){
+             do {
+                try {
+                    this.cordenaday=this.cordenaday-10;
+                    this.hilo.sleep(250);
+                    paint(getGraphics()); 
+                    
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+            } while (this.cordenaday>0);
+            paint(getGraphics());
+            
+            
+            
+        }
+        else if(au==2){
+             do {
+                try {
+                    this.cordenaday=this.cordenaday + 10;
+                this.hilo.sleep(250);
+                    paint(getGraphics()); 
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+            } while (this.cordenaday < ventana.getHeight()- 45);
+            paint(getGraphics());
+            
+            
+            
+        }
+        else{
+            
+             do {
+                try {
+                    this.cordenadax=this.cordenadax+10;
+                this.hilo.sleep(250);
+                paint(getGraphics()); 
+                    
+                }catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+            } while (this.cordenadax < ventana.getWidth()-anchoBits);
+            paint(getGraphics());
+            
+        }
+        cont++;
+        
+    }
+            
+        
+        
+    }
